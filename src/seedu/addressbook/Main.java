@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import java.io.FileNotFoundException;
+
+
 
 /**
  * Entry point of the Address Book application.
@@ -55,7 +58,7 @@ public class Main {
             this.addressBook = storage.load();
             ui.showWelcomeMessage(VERSION, storage.getPath());
 
-        } catch (InvalidStorageFilePathException | StorageOperationException e) {
+        } catch (InvalidStorageFilePathException | StorageOperationException | FileNotFoundException e) {
             ui.showInitFailedMessage();
             /*
              * ==============NOTE TO STUDENTS=========================================================================
@@ -107,6 +110,7 @@ public class Main {
         try {
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
+            storage.checkStorageFileExits();
             storage.save(addressBook);
             return result;
         } catch (Exception e) {
