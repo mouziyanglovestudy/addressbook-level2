@@ -60,6 +60,18 @@ public class Person implements ReadOnlyPerson {
     }
 
     /**
+     * Returns a concatenated version of the printable strings of each object.
+     */
+    @Override
+    public String getPrintableString(Printable... printables){
+        String printableString = "";
+        for(Printable p: printables){
+            printableString += p.getPrintableString();
+        }
+        return printableString;
+    }
+        
+    /**
      * Replaces this person's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
