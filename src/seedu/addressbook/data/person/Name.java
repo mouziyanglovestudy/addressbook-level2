@@ -28,6 +28,7 @@ public class Name {
     public Name(String name) throws IllegalValueException {
         String trimmedName = name.trim();
         trimmedName = trimmedName.replace(",", "");
+        trimmedName = trimmedName.replace(".", "");
         if (!isValidName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }

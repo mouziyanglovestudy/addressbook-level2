@@ -83,5 +83,10 @@ public class NameTest {
         other = new Name("Valid Name Sr");
         assertFalse(tester.isSimilar(other));
 
+        
+        //if compare with a name with full stop
+        tester = new Name("Valid Name");
+        other = new Name("Mr. Valid Name");
+        assertTrue(tester.isSimilar(other));
     }
 }
