@@ -16,8 +16,16 @@ public class NameTest {
     @Test
     public void isSimilar() throws IllegalValueException{
         
+        Name tester;
+        Name other;
+        
         //if compare with null
-        Name tester = new Name("Valid Name");
+        tester = new Name("Valid Name");
         assertFalse(tester.isSimilar(null));
+        
+        //if compare with a single letter
+        tester = new Name("Valid Name");
+        other = new Name("A");
+        assertFalse(tester.isSimilar(other));
     }
 }
