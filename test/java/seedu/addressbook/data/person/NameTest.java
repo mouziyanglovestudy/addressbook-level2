@@ -57,5 +57,15 @@ public class NameTest {
         tester = new Name("Valid Name");
         other = new Name("Name Valid");
         assertTrue(tester.isSimilar(other));
+        
+        //if compare with the same name but different orders and case letters
+        tester = new Name("Valid Name");
+        other = new Name("nAME vALID");
+        assertTrue(tester.isSimilar(other));
+        
+        //if compare with the same name but adding comma inside
+        tester = new Name("Valid Name");
+        other = new Name("Valid, Name");
+        assertTrue(tester.isSimilar(other));
     }
 }
