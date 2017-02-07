@@ -32,5 +32,10 @@ public class NameTest {
         tester = new Name("Valid Name");
         other = new Name("NUS CS");
         assertFalse(tester.isSimilar(other));
+        
+        //if compare with the same name
+        tester = new Name("Valid Name");
+        other = new Name("Valid Name");
+        assertTrue(tester.isSimilar(other));
     }
 }
