@@ -37,5 +37,10 @@ public class NameTest {
         tester = new Name("Valid Name");
         other = new Name("Valid Name");
         assertTrue(tester.isSimilar(other));
+        
+        //if compare with the same name with all lower case letters
+        tester = new Name("Valid Name");
+        other = new Name("valid name");
+        assertTrue(tester.isSimilar(other));
     }
 }

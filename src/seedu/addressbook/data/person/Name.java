@@ -68,9 +68,9 @@ public class Name {
          if (other == null) {
              return false;
          }
-         if (this.fullName.equals(other.fullName)){
+         if (this.fullName.toLowerCase().equals(other.fullName.toLowerCase())){
              return true;
-         }
+         } 
          return false;
      }
 
