@@ -27,5 +27,10 @@ public class NameTest {
         tester = new Name("Valid Name");
         other = new Name("A");
         assertFalse(tester.isSimilar(other));
+        
+        //if compare with a complete different name with multiple parts
+        tester = new Name("Valid Name");
+        other = new Name("NUS CS");
+        assertFalse(tester.isSimilar(other));
     }
 }
