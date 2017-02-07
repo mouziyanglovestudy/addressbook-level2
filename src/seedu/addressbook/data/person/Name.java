@@ -76,18 +76,17 @@ public class Name {
          if (other == null) {
              return false;
          } else if (this.nameSegments.length < other.nameSegments.length){             
-             if (other.segmentsList.containsAll(segmentsList)){
+             if (other.segmentsList.containsAll(this.segmentsList)){
                      return true;
              } else {
                  return false;
              }
          } else {
-             for (int i = 0; i < this.nameSegments.length; i++){
-                 if (!this.nameSegments[i].equals(other.nameSegments[i])){
-                     return false;
-                 }
+             if (this.segmentsList.containsAll(other.segmentsList)){
+                 return true;
+             } else {
+                 return false;
              }
-             return true;
          }
      }
 

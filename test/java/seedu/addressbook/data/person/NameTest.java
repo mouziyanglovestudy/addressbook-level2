@@ -72,5 +72,16 @@ public class NameTest {
         tester = new Name("Valid Name");
         other = new Name("Valid Name Plus");
         assertTrue(tester.isSimilar(other));
+        
+        //if compare with the name containing less segments
+        tester = new Name("Valid Name");
+        other = new Name("Valid");
+        assertTrue(tester.isSimilar(other));
+        
+        //if compare with different name but has overlap
+        tester = new Name("Valid Name Jr");
+        other = new Name("Valid Name Sr");
+        assertFalse(tester.isSimilar(other));
+
     }
 }
