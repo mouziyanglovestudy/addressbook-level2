@@ -2,8 +2,6 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.exception.IllegalValueException;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +15,6 @@ public class Name {
     public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should be spaces or alphabetic characters";
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alpha} ]+";
     public final String fullName;
-    private final String[] nameSegments;
     private final List<String> segmentsList; 
 
     /**
@@ -26,16 +23,12 @@ public class Name {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Name(String name) throws IllegalValueException {
-        String trimmedName = name.trim();
-        trimmedName = trimmedName.replace(",", "");
-        trimmedName = trimmedName.replace(".", "");
+        String trimmedName = trimName(name);
         if (!isValidName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
         this.fullName = trimmedName;
-        this.nameSegments = this.fullName.toLowerCase().split(" ");
-        Arrays.sort(this.nameSegments);
-        this.segmentsList = Arrays.asList(this.nameSegments);
+        this.segmentsList = convertNameIntoSegmentsList(trimmedName);
     }
 
     /**
@@ -76,19 +69,44 @@ public class Name {
      public boolean isSimilar(Name other) {
          if (other == null) {
              return false;
-         } else if (this.nameSegments.length < other.nameSegments.length){             
-             if (other.segmentsList.containsAll(this.segmentsList)){
-                     return true;
-             } else {
-                 return false;
-             }
          } else {
-             if (this.segmentsList.containsAll(other.segmentsList)){
-                 return true;
-             } else {
-                 return false;
-             }
+             return listContain(this.segmentsList, other.segmentsList);
          }
+     }
+     
+     /**
+      * Return if there is containing relationship between two lists
+      * 
+      * @param a
+      * @param b
+      * @return a contains b or b contains a
+      */
+     private <E> boolean listContain(List<E> a, List<E> b){
+         return a.containsAll(b) || b.containsAll(a);
+     }
+
+     /**
+      * Remove punctuation and leading spaces of a string
+      * 
+      * @param name
+      * @return name without punctuation and leading spaces
+      */
+     private String trimName(String name) {
+         String trimmedName = name.trim();
+         trimmedName = trimmedName.replace(",", "");
+         trimmedName = trimmedName.replace(".", "");
+         return trimmedName;
+     }
+     
+     /**
+      * Store segments of a name in a list
+      * @param trimmedName
+      * @return a list of name segments
+      */
+     private List<String> convertNameIntoSegmentsList(String trimmedName) {
+         String[] nameSegments = this.fullName.toLowerCase().split(" ");
+         Arrays.sort(nameSegments);
+         return Arrays.asList(nameSegments);
      }
 
 }
