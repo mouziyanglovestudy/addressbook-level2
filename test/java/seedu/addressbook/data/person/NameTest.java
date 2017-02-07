@@ -52,5 +52,10 @@ public class NameTest {
         tester = new Name("Valid Name");
         other = new Name("vALID nAME");
         assertTrue(tester.isSimilar(other));
+        
+        //if compare with the same name but different orders
+        tester = new Name("Valid Name");
+        other = new Name("Name Valid");
+        assertTrue(tester.isSimilar(other));
     }
 }

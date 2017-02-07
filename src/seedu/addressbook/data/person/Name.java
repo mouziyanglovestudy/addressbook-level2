@@ -2,6 +2,7 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.exception.IllegalValueException;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Name {
     public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should be spaces or alphabetic characters";
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alpha} ]+";
     public final String fullName;
+    public final String[] nameSegments;
 
     /**
      * Validates given name.
@@ -27,6 +29,8 @@ public class Name {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
         this.fullName = trimmedName;
+        this.nameSegments = this.fullName.toLowerCase().split(" ");
+        Arrays.sort(this.nameSegments);
     }
 
     /**
@@ -67,11 +71,16 @@ public class Name {
      public boolean isSimilar(Name other) {
          if (other == null) {
              return false;
-         }
-         if (this.fullName.toLowerCase().equals(other.fullName.toLowerCase())){
+         } else if (this.nameSegments.length != other.nameSegments.length){             
+             return false;
+         } else {
+             for (int i = 0; i < this.nameSegments.length; i++){
+                 if (!this.nameSegments[i].equals(other.nameSegments[i])){
+                     return false;
+                 }
+             }
              return true;
-         } 
-         return false;
+         }
      }
 
 }
